@@ -70,6 +70,14 @@ The features in the dataset are described below:
 
 These missing values are distributed throughout the dataset and are not uniformly distributed.Certain periods show clusters of missing values (entire sections are missing) and Other periods have sporadic gaps. Missing data in pm2.5 might be due to sensor failure, data collection issues, or external factors like weather or maintenance. This pattern suggests the need to investigate if missing data aligns with specific months, seasons, or hours of the day. Gaps in pm2.5 data could affect trend and seasonal analysis. Imputation or interpolation will likely be needed. The high number of missing values might make it challenging to perform accurate predictions without a robust handling strategy. 
 
+
+![alt text](images/pm2.5%20missing%20value%20counts.png)
+
+![alt text](images/missing%20value%20patterns.png)
+
+
+
+
 ## Handling outliers:
 
 In IWS, numerous extreme outliers exceeding 300–500 m/s, with unrealistic values close to 600.
@@ -121,13 +129,15 @@ The Bidirectional LSTM with Attention Mechanism was employed to improve the accu
 
 Below are the last 12 step predictions for pm2.5 and also atmospheric pressure,
 
-![alt text](images/image-2.png)
+![alt text](images/pm2.5%20predictions.png)
 
-The final model demonstrated notable improvements in trend prediction and generalization across both objectives. For PM2.5 forecasting, the model effectively captured long-term trends and flat regions, though sharp spikes remained slightly underpredicted. The results showed an MSE of 0.0038, an MAE of 0.0378, and an RMSE of 0.0616, with an R² score of 0.7925, indicating good predictive performance. Meanwhile, for atmospheric pressure prediction, the model achieved a significantly high accuracy, with an MSE of 0.0012, an RMSE of 0.0343, an MAE of 0.0247, and an R² score of 0.9624, demonstrating excellent variance explanation. Visual inspection confirmed that the model successfully captured the overall patterns, with minimal deviations from actual values. However, sudden PM2.5 spikes were still slightly underestimated, suggesting room for improvement in handling extreme values.
+![alt text](images/atmospheric%20pressure%20preds.png)
+
+The final model demonstrated notable improvements in trend prediction and generalization across both objectives. For PM2.5 forecasting, the model effectively captured long-term trends and flat regions, though sharp spikes remained slightly underpredicted. The results showed an MSE of 0.0040, an MAE of 0.0385, and an RMSE of 0.0633, with an R² score of 0.7809, indicating good predictive performance. Meanwhile, for atmospheric pressure prediction, the model achieved a significantly high accuracy, with an MSE of 0.0024, an RMSE of 0.0359, an MAE of 0.0486, and an R² score of 0.9245, demonstrating excellent variance explanation. Visual inspection confirmed that the model successfully captured the overall patterns, with minimal deviations from actual values. However, sudden PM2.5 spikes were still slightly underestimated, suggesting room for improvement in handling extreme values.
 
 ## Conclusions: 
 
-To enhance the model further, Bidirectional LSTMs were used to incorporate past and future dependencies, while the Attention Layer allowed the model to focus on critical time steps, improving long-range dependency handling. Fine-tuning efforts, such as reducing the learning rate (0.0005), optimizing Dropout (0.1), and using EarlyStopping, contributed to model stability. Overall, the Bidirectional LSTM + Attention + Swish model provided a robust approach for multi-step forecasting. Future improvements will focus on feature engineering, data augmentation, and advanced architectures to further refine spike prediction accuracy and enhance model interpretability.
+To enhance the model further, Bidirectional LSTMs were used to incorporate past and future dependencies, while the Attention Layer allowed the model to focus on critical time steps, improving long-range dependency handling. Fine-tuning efforts, such as reducing the learning rate (0.000001), optimizing Dropout (0.1), and using EarlyStopping, contributed to model stability. Overall, the Bidirectional LSTM + Attention + Swish model provided a robust approach for multi-step forecasting. Future improvements will focus on feature engineering, data augmentation, and advanced architectures to further refine spike prediction accuracy and enhance model interpretability.
 
 
 ## References:
