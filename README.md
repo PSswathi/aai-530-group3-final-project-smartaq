@@ -84,15 +84,44 @@ By observing at the above plots it clearly explans that rolling/moving average d
 
 So as part of feature engineering we would like to perform some rolling features on pm2.5 and Pressure .
 
+## Feature Engineering:
+
+As part of feature engineering below new lag and interaction features are extracted ,
+
+cbwd_encoded
+cbwd_angle
+cbwd_sin
+cbwd_cos
+pm2.5_rolling_3h
+pm2.5_rolling_24h
+pm2.5_lag_1
+Iws_lag_1
+day_avg_pm2.5
+temp_dew_spread
+Iws_rain_interaction
+
+
+
 ## Model training and evaluations
 
 ## AI Algorithms and Model Selection
+
+Linear regression performed well with below performance scores however struggled with huge errors and difficulty learning the seasonal trends or patterns of the prediction pm2.5.
+
+Mean Squared Error (MSE): 280.2022
+Root Mean Squared Error (RMSE): 16.7392
+Mean Absolute Error (MAE): 10.0037
+R² Score: 0.9685
 
 
 We experimented with both Linear Regression and LSTM for PM2.5 prediction. While Linear Regression served as a baseline model, it struggled with the nonlinear dependencies, seasonal trends, and temporal patterns in air pollution data, leading to suboptimal performance. In contrast, LSTM, a deep learning model designed for time-series forecasting, significantly outperformed traditional ML approaches. LSTM effectively remembers long-term dependencies, capturing seasonal fluctuations, daily cycles, and complex interactions between meteorological factors. Unlike conventional models, it processes data sequentially, preserving historical context, which enhances predictive accuracy. Empirical results showed that LSTM achieved lower Mean Squared Error (MSE) and Mean Absolute Error (MAE), validating its superiority in forecasting PM2.5 and Pressure levels and reinforcing the importance of deep learning in air quality prediction.
 
 
 The Bidirectional LSTM with Attention Mechanism was employed to improve the accuracy of multi-step time series forecasting for both PM2.5 concentration and atmospheric pressure (PRES) predictions. The model architecture consisted of two Bidirectional LSTM layers (100 and 50 units, respectively), an Attention Layer, and a Dense(12) output layer to generate predictions for the next 12 time steps. The Swish activation function was used instead of ReLU to enhance gradient flow, and Dropout (0.1) was applied to prevent overfitting. The model was trained using the Adam optimizer (learning rate = 0.0005) with EarlyStopping to avoid overfitting and ReduceLROnPlateau for adaptive learning rate adjustments. The evaluation metrics included Mean Squared Error (MSE), Root Mean Squared Error (RMSE), Mean Absolute Error (MAE), and R² Score to assess predictive accuracy.
+
+Below are the last 12 step predictions for pm2.5 and also atmospheric pressure,
+
+![alt text](images/image-2.png)
 
 The final model demonstrated notable improvements in trend prediction and generalization across both objectives. For PM2.5 forecasting, the model effectively captured long-term trends and flat regions, though sharp spikes remained slightly underpredicted. The results showed an MSE of 0.0038, an MAE of 0.0378, and an RMSE of 0.0616, with an R² score of 0.7925, indicating good predictive performance. Meanwhile, for atmospheric pressure prediction, the model achieved a significantly high accuracy, with an MSE of 0.0012, an RMSE of 0.0343, an MAE of 0.0247, and an R² score of 0.9624, demonstrating excellent variance explanation. Visual inspection confirmed that the model successfully captured the overall patterns, with minimal deviations from actual values. However, sudden PM2.5 spikes were still slightly underestimated, suggesting room for improvement in handling extreme values.
 
