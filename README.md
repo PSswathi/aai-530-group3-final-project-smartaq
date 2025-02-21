@@ -127,6 +127,12 @@ We experimented with both Linear Regression and LSTM for PM2.5 prediction. While
 
 The Bidirectional LSTM with Attention Mechanism was employed to improve the accuracy of multi-step time series forecasting for both PM2.5 concentration and atmospheric pressure (PRES) predictions. The model architecture consisted of two Bidirectional LSTM layers (100 and 50 units, respectively), an Attention Layer, and a Dense(12) output layer to generate predictions for the next 12 time steps. The Swish activation function was used instead of ReLU to enhance gradient flow, and Dropout (0.1) was applied to prevent overfitting. The model was trained using the Adam optimizer (learning rate = 0.0005) with EarlyStopping to avoid overfitting and ReduceLROnPlateau for adaptive learning rate adjustments. The evaluation metrics included Mean Squared Error (MSE), Root Mean Squared Error (RMSE), Mean Absolute Error (MAE), and R² Score to assess predictive accuracy.
 
+Below are the train and test loss graphs for pm2.5 prediction and pressure prediction models
+
+![alt text](images/train_test_loss_graph_pm2.5.png)
+
+![alt text](images/train_test_loss_graph_pres.png)
+
 Below are the last 12 step predictions for pm2.5 and also atmospheric pressure,
 
 ![alt text](images/pm2.5%20predictions.png)
